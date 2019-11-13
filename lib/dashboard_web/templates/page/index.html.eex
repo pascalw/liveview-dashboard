@@ -1,0 +1,5 @@
+<div class="flex-layout">
+  <div class="flex-layout__widget-container">
+    <%= Phoenix.LiveView.live_render(@conn, DashboardWeb.ClockLive) %>
+  </div>
+</div>

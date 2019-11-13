@@ -1,0 +1,35 @@
+.flex-layout {
+  display: flex;
+  flex-direction: column;
+
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.flex-layout__meta-container {
+  margin: auto 1em 1em;
+}
+
+.flex-layout__widget-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0.5em;
+}
+
+.flex-layout__widget {
+  --base-widget-size: 300px;
+
+  flex: 1 1 var(--base-widget-size);
+  min-width: var(--base-widget-size);
+  min-height: var(--base-widget-size);
+
+  padding: 0.75em;
+  margin: 0.5em;
+  color: #fff;
+  word-wrap: break-word;
+  hyphens: auto;
+
+  position: relative;
+}

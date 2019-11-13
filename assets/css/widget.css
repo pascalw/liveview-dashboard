@@ -1,0 +1,58 @@
+.widget {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  font-size: calc(100% + 0.5vw);
+  text-align: center;
+
+  position: relative;
+}
+
+.widget__bg-image {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  bottom: 1em;
+  right: 1em;
+  left: 1em;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.widget__inner {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.widget__label {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.widget__label-large {
+  font-size: 4em;
+}
+
+.widget__label-medium {
+  font-size: 2em;
+}
+
+.widget__label-small {
+  font-size: 1.5em;
+}
+
+.widget__link {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
