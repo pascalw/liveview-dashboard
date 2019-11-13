@@ -1,11 +1,9 @@
 defmodule DashboardWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :dashboard
 
-  socket "/socket", DashboardWeb.UserSocket,
-    websocket: true,
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [timeout: 45_000],
     longpoll: false
-
-  socket "/live", Phoenix.LiveView.Socket
 
   # Serve at "/" the static files from "priv/static" directory.
   #

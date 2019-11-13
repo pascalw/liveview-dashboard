@@ -12,6 +12,8 @@ secret_key_base =
     """
 
 config :dashboard, DashboardWeb.Endpoint,
+  url: [scheme: "https", host: "intense-depths-88426", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
   secret_key_base: secret_key_base
 
