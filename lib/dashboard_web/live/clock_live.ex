@@ -1,5 +1,5 @@
 defmodule DashboardWeb.ClockLive do
-  use Phoenix.LiveView, container: {:div, class: "widget flex-layout__widget", style: "background-color: rgb(0, 134, 90)"}
+  use DashboardWeb.Widget, style: ["background-color": "rgb(0, 134, 90)"]
 
   def mount(_, socket) do
     if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
