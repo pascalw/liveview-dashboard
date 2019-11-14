@@ -9,7 +9,9 @@ defmodule Dashboard.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      DashboardWeb.Endpoint
+      DashboardWeb.Endpoint,
+      DashboardWeb.History,
+      DashboardWeb.CircleCI.Job
       # Starts a worker by calling: Dashboard.Worker.start_link(arg)
       # {Dashboard.Worker, arg},
     ]

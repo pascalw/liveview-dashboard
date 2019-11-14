@@ -1,16 +1,17 @@
 defmodule DashboardWeb.ClockLive do
-  use DashboardWeb.Widget, style: ["background-color": "rgb(0, 134, 90)"]
+  use DashboardWeb.Widget, namespace: "clock"
 
   def mount(_, socket) do
     if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
-
     {:ok, put_datetime(socket)}
   end
 
   def render(assigns) do
     ~L"""
-    <span class="widget__label-medium"><%= date(@date_time) %></span>
-    <span class="widget__label-large" style="margin-top: 10px;"><%= time(@date_time) %></span>
+    <div class="widget" style="background-color: rgb(0, 134, 90)">
+      <span class="widget__label-medium"><%= date(@date_time) %></span>
+      <span class="widget__label-large" style="margin-top: 10px;"><%= time(@date_time) %></span>
+    </div>
     """
   end
 

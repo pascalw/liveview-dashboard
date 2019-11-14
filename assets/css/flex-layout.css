@@ -25,11 +25,5 @@
   min-width: var(--base-widget-size);
   min-height: var(--base-widget-size);
 
-  padding: 0.75em;
-  margin: 0.5em;
-  color: #fff;
-  word-wrap: break-word;
-  hyphens: auto;
-
   position: relative;
 }
