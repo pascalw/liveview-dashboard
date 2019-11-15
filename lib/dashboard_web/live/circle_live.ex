@@ -19,15 +19,7 @@ defmodule DashboardWeb.CircleCI do
   end
 
   defmodule Job do
-    use Dashboard.Job, namespace: "circleci"
-    @refresh_interval 10000
-
-    def init(_) do
-      send(self(), :update)
-      :timer.send_interval(@refresh_interval, self(), :update)
-
-      {:ok, nil}
-    end
+    use Dashboard.TimedJob, namespace: "circleci", refresh_interval: 10_000
 
     def handle_info(:update, _state) do
       broadcast(%{
