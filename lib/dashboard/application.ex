@@ -10,7 +10,7 @@ defmodule Dashboard.Application do
     children = [
       # Start the endpoint when the application starts
       DashboardWeb.Endpoint,
-      DashboardWeb.History,
+      Dashboard.EventHistory,
       DashboardWeb.CircleCI.Job
       # Starts a worker by calling: Dashboard.Worker.start_link(arg)
       # {Dashboard.Worker, arg},

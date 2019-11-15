@@ -1,4 +1,4 @@
-defmodule DashboardWeb.Job do
+defmodule Dashboard.Job do
   defmacro __using__(namespace: namespace) do
     quote do
       use GenServer

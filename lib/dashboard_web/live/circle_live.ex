@@ -1,23 +1,6 @@
 defmodule DashboardWeb.CircleCI do
   defmodule Widget do
-    use DashboardWeb.Widget, namespace: "circleci"
-
-    def mount(_, socket) do
-      if connected?(socket) do
-        subscribe(socket)
-      else
-        {:ok, socket}
-      end
-    end
-
-    def handle_info(%{repo: repo, outcome: outcome}, socket) do
-      socket =
-        socket
-        |> assign(:repo, repo)
-        |> assign(:outcome, outcome)
-
-      {:noreply, socket}
-    end
+    use Dashboard.Widget, namespace: "circleci"
 
     def render(%{repo: _} = assigns) do
       ~L"""
@@ -36,8 +19,8 @@ defmodule DashboardWeb.CircleCI do
   end
 
   defmodule Job do
-    use DashboardWeb.Job, namespace: "circleci"
-    @refresh_interval 60000
+    use Dashboard.Job, namespace: "circleci"
+    @refresh_interval 10000
 
     def init(_) do
       send(self(), :update)

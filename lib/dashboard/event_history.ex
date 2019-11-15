@@ -1,12 +1,12 @@
-defmodule DashboardWeb.History do
+defmodule Dashboard.EventHistory do
   use GenServer
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
-  def history(namespace) do
-    GenServer.call(__MODULE__, {:history, namespace})
+  def fetch_last_event(namespace) do
+    GenServer.call(__MODULE__, {:fetch_last_event, namespace})
   end
 
   @impl true
@@ -22,7 +22,7 @@ defmodule DashboardWeb.History do
   end
 
   @impl true
-  def handle_call({:history, namespace}, _from, state) do
+  def handle_call({:fetch_last_event, namespace}, _from, state) do
     {:reply, Map.get(state, namespace), state}
   end
 end
