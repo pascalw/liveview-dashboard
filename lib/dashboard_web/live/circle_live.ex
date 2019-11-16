@@ -21,11 +21,25 @@ defmodule DashboardWeb.CircleCI do
   defmodule Job do
     use Dashboard.TimedJob, namespace: "circleci", refresh_interval: 10_000
 
+    @project "github/pascalw/dashbling"
+    @headers [Accept: "application/json"]
+
     def handle_info(:update, _state) do
-      broadcast(%{
-        repo: "Dashbling",
-        outcome: Enum.random(["success", "fail"])
-      })
+      json =
+        HTTPoison.get!(
+          "https://circleci.com/api/v1.1/project/#{@project}?filter=completed&limit=1",
+          @headers
+        ).body
+        |> Jason.decode!()
+        |> Enum.at(0)
+
+      event = %{
+        repo: json["reponame"],
+        outcome: json["outcome"],
+        buildUrl: json["build_url"]
+      }
+
+      broadcast(event)
 
       {:noreply, nil}
     end
