@@ -1,5 +1,5 @@
 defmodule DashboardWeb.ClockLive do
-  use Dashboard.Widget, namespace: "clock"
+  use Dashboard.Widget
 
   def mount(_, socket) do
     if connected?(socket), do: :timer.send_interval(1000, self(), :tick)

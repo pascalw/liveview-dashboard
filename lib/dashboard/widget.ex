@@ -1,27 +1,26 @@
 defmodule Dashboard.Widget do
-  defmacro __using__([namespace: namespace] = opts) do
+  defmacro __using__(opts) do
     style = Keyword.get(opts, :style, [])
 
     opts =
       [class: "widget__wrapper flex-layout__widget"]
       |> Keyword.merge(opts)
       |> Keyword.put(:style, to_css(style))
-      |> Keyword.delete(:namespace)
 
     quote do
       use Phoenix.LiveView, container: {:div, unquote(opts)}
       @before_compile Dashboard.Widget
 
-      def mount(_, socket) do
-        if connected?(socket) do
-          subscribe(socket)
+      def mount(options, socket) do
+        if connected?(socket) && Map.has_key?(options, :event_id) do
+          subscribe(socket, Map.get(options, :event_id))
         else
           {:ok, socket}
         end
       end
       defoverridable mount: 2
 
-      def handle_info({unquote(namespace), event}, socket) do
+      def handle_info({_event_id, event}, socket) do
         handle_info(event, socket)
       end
 
@@ -29,12 +28,12 @@ defmodule Dashboard.Widget do
         DashboardWeb.Endpoint.static_path(path)
       end
 
-      defp subscribe(socket) do
-        Phoenix.PubSub.subscribe(Dashboard.PubSub, "events")
+      defp subscribe(socket, event_id) do
+        Phoenix.PubSub.subscribe(Dashboard.PubSub, event_id)
 
         with event when not is_nil(event) <-
-               Dashboard.EventHistory.fetch_last_event(unquote(namespace)),
-             {_, socket} <- handle_info({unquote(namespace), event}, socket) do
+               Dashboard.EventHistory.fetch_last_event(event_id),
+             {_, socket} <- handle_info({event_id, event}, socket) do
           {:ok, socket}
         else
           _ -> {:ok, socket}

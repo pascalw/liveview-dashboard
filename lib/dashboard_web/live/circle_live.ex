@@ -1,6 +1,6 @@
 defmodule DashboardWeb.CircleCI do
   defmodule Widget do
-    use Dashboard.Widget, namespace: "circleci"
+    use Dashboard.Widget
 
     def render(%{repo: _} = assigns) do
       ~L"""
@@ -19,15 +19,14 @@ defmodule DashboardWeb.CircleCI do
   end
 
   defmodule Job do
-    use Dashboard.TimedJob, namespace: "circleci", refresh_interval: 10_000
+    use Dashboard.TimedJob, refresh_interval: 10_000
 
-    @project "github/pascalw/dashbling"
     @headers [Accept: "application/json"]
 
-    def handle_info(:update, _state) do
+    def handle_info(:update, [opts: [event_id: event_id, project: project]] = state) do
       json =
         HTTPoison.get!(
-          "https://circleci.com/api/v1.1/project/#{@project}?filter=completed&limit=1",
+          "https://circleci.com/api/v1.1/project/#{project}?filter=completed&limit=1",
           @headers
         ).body
         |> Jason.decode!()
@@ -39,9 +38,9 @@ defmodule DashboardWeb.CircleCI do
         buildUrl: json["build_url"]
       }
 
-      broadcast(event)
+      broadcast(event_id, event)
 
-      {:noreply, nil}
+      {:noreply, state}
     end
   end
 end

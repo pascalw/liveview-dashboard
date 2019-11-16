@@ -11,7 +11,7 @@ defmodule Dashboard.Application do
       # Start the endpoint when the application starts
       DashboardWeb.Endpoint,
       Dashboard.EventHistory,
-      DashboardWeb.CircleCI.Job
+      {DashboardWeb.CircleCI.Job, project: "github/pascalw/dashbling", event_id: "dashbling-ci-status"}
       # Starts a worker by calling: Dashboard.Worker.start_link(arg)
       # {Dashboard.Worker, arg},
     ]
