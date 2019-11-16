@@ -23,7 +23,10 @@ defmodule DashboardWeb.CircleCI do
 
     @headers [Accept: "application/json"]
 
-    def handle_info(:update, [opts: [event_id: event_id, project: project]] = state) do
+    def handle_info(:update, state) do
+      event_id = state[:opts][:event_id]
+      project = state[:opts][:project]
+
       json =
         HTTPoison.get!(
           "https://circleci.com/api/v1.1/project/#{project}?filter=completed&limit=1",
