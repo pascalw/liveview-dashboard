@@ -19,7 +19,7 @@ defmodule DashboardWeb.CircleCI do
   end
 
   defmodule Job do
-    use Dashboard.TimedJob, refresh_interval: 10_000
+    use Dashboard.TimedJob, refresh_interval: 30_000
 
     @headers [Accept: "application/json"]
 

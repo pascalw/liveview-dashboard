@@ -1,0 +1,33 @@
+@keyframes pulse-connection-lost {
+  0% {
+    background-color: var(--connection-lost-bg-color-1);
+  }
+  50% {
+    background-color: var(--connection-lost-bg-color-2);
+  }
+  100% {
+    background-color: var(--connection-lost-bg-color-1);
+  }
+}
+
+html.dashbling-disconnected .dashbling-connection__container {
+  display: block;
+}
+
+.dashbling-connection__container {
+  display: none;
+
+  color: #fff;
+  text-align: center;
+  margin: 2em;
+}
+
+.dashbling-connection__inner {
+  --connection-lost-bg-color-1: #e82711;
+  --connection-lost-bg-color-2: #9b2d23;
+
+  animation: pulse-connection-lost 2s infinite;
+  display: inline;
+  padding: 0.5em 1em;
+  background: var(--connection-lost-bg-color-1);
+}

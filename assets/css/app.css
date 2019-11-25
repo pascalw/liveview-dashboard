@@ -1,5 +1,7 @@
 @import "./widget.css";
 @import "./flex-layout.css";
+@import "./connection-widget.css";
+@import "./lastupdated-widget.css";
 
 html, body, #root {
   width: 100vw;

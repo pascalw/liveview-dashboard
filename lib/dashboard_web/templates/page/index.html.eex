@@ -3,4 +3,12 @@
     <%= Phoenix.LiveView.live_render(@conn, DashboardWeb.ClockLive) %>
     <%= Phoenix.LiveView.live_render(@conn, DashboardWeb.CircleCI.Widget, session: %{event_id: "dashbling-ci-status"}) %>
   </div>
+
+  <div class="flex-layout__meta-container">
+    <div class="dashbling-connection__container">
+      <span class="dashbling-connection__inner">Connection lost</span>
+    </div>
+
+    <div class="dashbling-last-updated"></div>
+  </div>
 </div>
